@@ -16,7 +16,7 @@
         <div class="col-6 d-flex justify-content-center" style="background-color: aqua; min-height: 70px; margin-top: 1%;" onclick="iniciarJuego('1') ">
             MANSION
         </div>
-        <div class="col-6 d-flex justify-content-center" style="background-color: blueviolet; min-height: 70px; margin-top: 1%;"  onclick="iniciarJuego('2')">
+        <div class="col-6 d-flex justify-content-center" style="background-color: blueviolet; min-height: 70px; margin-top: 1%;" onclick="iniciarJuego('2')">
             PLAYA
         </div>
     </div>
@@ -28,38 +28,45 @@
 </body>
 </html>
 <script type="text/javascript">
-    //Tiene ls jugadores,armas y escenarios del juego
-    var myArray = ["Verdi", "Mostaza", "Azulino", "Moradillo", "Escarlata", "Blanco", "Llave inglesa", "Candeladro", "Daga"
-        , "Pistola", "Tuberia", "Soga", "Baño", "Estudio", "Comedor", "Salón de juegos", "Garaje", "Habitacion", "Sala", "Cocina", "Patio"]
+    //Tiene ls jugadores,armas y escenarios del
 
-    var myArrayPlaya = ["Verdi", "Mostaza", "Azulino", "Moradillo", "Escarlata", "Blanco", "Llave inglesa", "Candeladro", "Daga"
-        , "Pistola", "Tuberia", "Soga", "Playa", "Juegos de Video", "Renta de Jet Ski", "Feria", "Tienda", "Casa de Playa"]
+    var Armas = ["ARMAS", "Llave inglesa", "Candeladro", "Daga", "Pistola", "Tuberia", "Soga"];
+    var Personajes = ["SOSPECHOSOS", "Verdi", "Mostaza", "Azulino", "Moradillo", "Escarlata", "Blanco"];
+    var Escenarios_Mansion = ["LUGAR", "Baño", "Estudio", "Comedor", "Salón de juegos", "Garaje", "Habitacion", "Sala", "Cocina", "Patio"];
+
+    var myArray = [Armas, Personajes, Escenarios_Mansion]
+
+    var Escenarios_Playa = ["LUGAR", "Playa", "Juegos de Video", "Renta de Jet Ski", "Feria", "Tienda", "Casa de Playa"];
+
+    var myArrayPlaya = [Armas, Personajes, Escenarios_Playa]
 
     function iniciarJuego(valor) {
         document.getElementById("bodyClue").innerHTML = "";
+        var ArrayPivot = [];
         if (valor == 1) {
-            myArray = shuffle(myArray);
-
-            for (var i = 0; i < myArray.length; i++) {
-                document.getElementById("bodyClue").innerHTML += '<div class="row" style="min-height: 70px; margin-top: 1%;">\
-            <div class="col-6" style = "background-color: gray;" onclick="cambiar_Color(this)"></div >\
-            <div class="col-6 d-flex justify-content-center" style="margin-top: 1%; font-size: 40px;">\
-                '+ myArray[i] + '\
-            </div>\
-        </div> '
-            }
+            ArrayPivot = myArray;
         } else {
-            myArrayPlaya = shuffle(myArrayPlaya);
+            ArrayPivot = myArrayPlaya;
+        }
+            myArray = shuffle(myArray);
+            console.log(myArray)
 
-            for (var i = 0; i < myArrayPlaya.length; i++) {
-                document.getElementById("bodyClue").innerHTML += '<div class="row" style="min-height: 70px; margin-top: 1%;">\
+        for (var i = 0; i < ArrayPivot.length; i++) {
+                var PrimeraVez = 1;
+            for (var j = 0; j < ArrayPivot[i].length; j++) {
+                    if (PrimeraVez == 1) {
+                        document.getElementById("bodyClue").innerHTML += '<hr style="margin-top:10px"><div class="d-flex justify-content-center"><h1>' + ArrayPivot[i][j] + '</h1></div><hr>';
+                        PrimeraVez++
+                    } else {
+                        document.getElementById("bodyClue").innerHTML += '<div class="row" style="min-height: 70px; margin-top: 1%;">\
             <div class="col-6" style = "background-color: gray;" onclick="cambiar_Color(this)"></div >\
-            <div class="col-6 d-flex justify-content-center" style="margin-top: 1%; font-size: 40px;">\
-                '+ myArrayPlaya[i] + '\
+            <div class="col-6 d-flex justify-content-center" style="margin-top: 1%; font-size: 35px;">\
+                '+ ArrayPivot[i][j] + '\
             </div>\
         </div> '
+                    }
+                }
             }
-        }
     }
 
 
